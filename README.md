@@ -6,7 +6,7 @@ In this activity, you'll create a new React-based Google Books Search app. This 
 
 ### Instructions
 
-[Link to App!](https://gentle-refuge-23003.herokuapp.com/)
+# [Link to App!](https://gentle-refuge-23003.herokuapp.com/)
 
 * This application requires at minimum 2 pages, check out the following mockup images for each page:
 
