@@ -4,9 +4,9 @@ import "./style.css";
 function Jumbotron() {
   return (
     <div className="jumbotron text-center">
-      <h1>React Recipes</h1>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.recipepuppy.com/about/api/">
-        Powered by Recipe Puppy
+      <h1>Google Books</h1>
+      <a target="_blank" rel="noopener noreferrer" href="https://books.google.com/books?uid=117913826271851609028&as_coll=8&source=gbs_lp_bookshelf_list">
+        Google Books Search
       </a>
     </div>
   );

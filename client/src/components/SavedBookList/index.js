@@ -32,7 +32,7 @@ export function BookListItem({
             <a rel="noreferrer noopener" target="_blank" href={link}>
               Go to Book!
             </a>
-            <button className="btn btn-lg btn-warning savedButton ml-5" type="button" onClick={onClick}>Saved</button>
+            <button className="btn btn-lg btn-warning savedButton ml-5" type="button" onClick={onClick}>Delete</button>
           </Col>
         </Row>
       </Container>

@@ -85,18 +85,18 @@ app.post("/search/:query", function (req, res) {
   axios.get(url).then(function (response) {
     // console.log(response.data.items[0])
     const result = {};
-    for(let i=0; i<response.data.items.length; i++){
-    result.title = response.data.items[i].volumeInfo.title
-    result.authors = response.data.items[i].volumeInfo.authors.join(", ")
-    result.description = response.data.items[i].volumeInfo.description
-    result.image = response.data.items[i].volumeInfo.imageLinks.smallThumbnail
-    result.link = response.data.items[i].volumeInfo.previewLink
-    // console.log(result)
-    //delete database for new search
-    db.Book.deleteMany({saved: false}, function (err) {
-      console.log(err)
-    });
-    db.Book.create(result)
+    for (let i = 0; i < response.data.items.length; i++) {
+      result.title = response.data.items[i].volumeInfo.title
+      result.authors = response.data.items[i].volumeInfo.authors.join(", ")
+      result.description = response.data.items[i].volumeInfo.description
+      result.image = response.data.items[i].volumeInfo.imageLinks.smallThumbnail
+      result.link = response.data.items[i].volumeInfo.previewLink
+      // console.log(result)
+      //delete database for new search
+      db.Book.deleteMany({ saved: false }, function (err) {
+        console.log(err)
+      });
+      db.Book.create(result)
         .then(function (dbArticle) {
           // View the added result in the console
           // console.log(dbArticle);
@@ -121,6 +121,37 @@ app.get("/api/books", function (req, res) {
       // If an error occurred, send it to the client
       res.json(err);
     });
+});
+
+app.post("/api/books", function (req, res) {
+  db.Book
+    .create(req.body)
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+});
+
+app.post("/api/books/:id", function (req, res) {
+  // console.log(req.params.id)
+  db.Book.findOneAndUpdate({ _id: req.params.id }, {saved: true})
+    .exec(function(err, doc) {
+      // Log any errors
+      if (err) {
+        console.log(err);
+      }
+      else {
+        // Or send the document to the browser
+        res.send(doc);
+      }
+    });
+  });
+
+app.delete("/api/books/:id", function (req, res) {
+  // console.log(req.params.id)
+  db.Book
+  .findById({ _id: req.params.id })
+  .then(dbModel => dbModel.remove())
+  .then(dbModel => res.json(dbModel))
+  .catch(err => res.status(422).json(err));
 });
 
 app.get("*", function (req, res) {
