@@ -14,6 +14,18 @@ class Search extends Component {
         message:""
     };
 
+    componentDidMount() {
+        this.loadBooks();
+    }
+
+    loadBooks = () => {
+        API.getBooks()
+            .then(res => {
+                this.setState({ books: res.data })
+            })
+            .catch(err => console.log(err));
+    };
+
     handleInputChange = event => {
         // Destructure the name and value properties off of event.target
         // Update the appropriate state
@@ -53,7 +65,9 @@ class Search extends Component {
 
     handleSaved = id => {
         // console.log(id)
-        alert("Saved book!")
+        // alert("Saved book!")
+        // window.location = "/";
+        this.loadBooks();
         API.savedBook(id)
             .then(res => {
                 // console.log(res)
